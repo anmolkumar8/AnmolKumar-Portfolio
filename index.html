@@ -16,7 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.min.css">
+    <link rel="preload" href="picture.PNG" as="image">
 </head>
 <body>
     <!-- Navigation -->
@@ -92,7 +93,7 @@
                 <div class="hero-image">
                     <div class="hero-img-container">
                         <div class="hero-img-bg"></div>
-                        <img src="picture.PNG" alt="Anmol Kumar" class="hero-profile-img">
+                        <img src="picture.PNG" alt="Anmol Kumar" class="hero-profile-img" loading="lazy" width="200" height="200">
                     </div>
                 </div>
             </div>
@@ -563,6 +564,6 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="script.js"></script>
+    <script src="script.min.js"></script>
 </body>
 </html>
