@@ -172,8 +172,6 @@ function validateEmail(email) {
 }
 
 function handleContactForm(e) {
-    e.preventDefault();
-    
     const formData = new FormData(contactForm);
     const name = formData.get('name').trim();
     const email = formData.get('email').trim();
@@ -211,13 +209,13 @@ function handleContactForm(e) {
     }
     
     if (hasErrors) {
+        e.preventDefault();
         showNotification('Please fill in all fields correctly.', 'error');
         return;
     }
     
-    // Show success message
-    showNotification('Thank you! Your message has been sent successfully.', 'success');
-    contactForm.reset();
+    // Let the form submit naturally to Formspree
+    showNotification('Sending your message...', 'success');
 }
 
 // Show Notification
