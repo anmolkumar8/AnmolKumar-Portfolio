@@ -33,6 +33,20 @@ To make your contact form functional and receive emails at anmolkumarhajipur0@gm
    ```
 4. **Update your JavaScript** to use EmailJS instead of the current form handler
 
+## Where You'll See Form Submissions
+
+### With Formspree:
+1. **📧 Your Email Inbox**: anmolkumarhajipur0@gmail.com
+2. **📊 Formspree Dashboard**: Login to formspree.io to see all submissions in a table
+3. **📱 Real-time Notifications**: Get instant email alerts
+
+### Dashboard Features:
+- View all form submissions
+- Export data as CSV
+- Spam protection
+- Form analytics
+- Mobile notifications
+
 ## Current Setup
 
 The form is currently set up with a placeholder Formspree URL. Once you replace it with your actual form endpoint, visitors will be able to send messages directly to your email: **anmolkumarhajipur0@gmail.com**
