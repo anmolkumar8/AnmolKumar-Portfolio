@@ -1,4 +1,4 @@
-// DOM Elements
+// Optimized DOM Elements
 const navbar = document.getElementById('navbar');
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
@@ -278,131 +278,66 @@ function showNotification(message, type) {
     }, 5000);
 }
 
-// Particle Effect for Hero Section
-function createParticleEffect() {
-    const hero = document.querySelector('.hero');
-    const particlesContainer = document.querySelector('.hero-particles');
-    
-    if (!particlesContainer) return;
-    
-    // Create floating particles
-    for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
+// Optimized Performance Functions
+// Debounced scroll handler for better performance
+function debounce(func, wait, immediate) {
+    let timeout;
+    return function executedFunction() {
+        const context = this;
+        const args = arguments;
         
-        Object.assign(particle.style, {
-            position: 'absolute',
-            width: Math.random() * 4 + 2 + 'px',
-            height: Math.random() * 4 + 2 + 'px',
-            backgroundColor: 'rgba(255, 255, 255, 0.3)',
-            borderRadius: '50%',
-            left: Math.random() * 100 + '%',
-            top: Math.random() * 100 + '%',
-            animation: `floatParticle ${Math.random() * 20 + 10}s infinite linear`
+        const later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+
+// Initialize Intersection Observer for better performance
+function initIntersectionObserver() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
         });
-        
-        particlesContainer.appendChild(particle);
-    }
+    }, observerOptions);
     
-    // Add particle animation CSS
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes floatParticle {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
+    // Observe elements for animation
+    const animatedElements = document.querySelectorAll('.fadeIn, .slideInLeft, .slideInRight');
+    animatedElements.forEach(el => observer.observe(el));
+}
+
+// Add animation classes to elements
+function addAnimationClasses() {
+    // Add fade in animation to sections
+    const sections = document.querySelectorAll('section');
+    sections.forEach((section, index) => {
+        if (index % 2 === 0) {
+            section.classList.add('fadeIn');
+        } else {
+            section.classList.add('slideInLeft');
         }
-    `;
-    document.head.appendChild(style);
-}
-
-// Loading Screen
-function showLoadingScreen() {
-    const loader = document.createElement('div');
-    loader.className = 'loader';
-    loader.innerHTML = `
-        <div class="loader-content">
-            <div class="spinner"></div>
-            <h3>Loading Portfolio...</h3>
-        </div>
-    `;
-    document.body.appendChild(loader);
-    
-    // Hide loader after page loads
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            loader.classList.add('hidden');
-            setTimeout(() => loader.remove(), 500);
-        }, 1000);
     });
-}
-
-// Project Filter (if needed later)
-function initProjectFilter() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
     
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const filterValue = btn.getAttribute('data-filter');
-            
-            // Update active button
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            // Filter projects
-            projectCards.forEach(card => {
-                const cardCategories = card.getAttribute('data-category');
-                if (filterValue === 'all' || cardCategories.includes(filterValue)) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.5s ease';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
-}
-
-// Parallax Effect
-function handleParallax() {
-    const parallaxElements = document.querySelectorAll('.parallax');
-    const scrolled = window.pageYOffset;
-    
-    parallaxElements.forEach(element => {
-        const rate = scrolled * -0.5;
-        element.style.transform = `translateY(${rate}px)`;
-    });
-}
-
-// Theme Toggle (Dark/Light Mode)
-function initThemeToggle() {
-    const themeToggle = document.getElementById('theme-toggle');
-    if (!themeToggle) return;
-    
-    // Check for saved theme preference
-    const savedTheme = localStorage.getItem('portfolio-theme');
-    if (savedTheme) {
-        document.body.setAttribute('data-theme', savedTheme);
-    }
-    
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = document.body.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        document.body.setAttribute('data-theme', newTheme);
-        localStorage.setItem('portfolio-theme', newTheme);
+    // Add slide animations to cards
+    const cards = document.querySelectorAll('.project-card, .cert-item, .skill-item');
+    cards.forEach((card, index) => {
+        if (index % 2 === 0) {
+            card.classList.add('slideInLeft');
+        } else {
+            card.classList.add('slideInRight');
+        }
     });
 }
 
@@ -475,11 +410,17 @@ function addAnimationClasses() {
     });
 }
 
+// Optimized scroll handler
+const optimizedScrollHandler = debounce(() => {
+    handleNavbarScroll();
+    handleScrollTopButton();
+    updateActiveNavLink();
+    animateSkillBars();
+    animateCounters();
+}, 16); // ~60fps
+
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize loading screen
-    showLoadingScreen();
-    
     // Add animation classes
     addAnimationClasses();
     
@@ -518,26 +459,16 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', handleContactForm);
     }
     
-    // Initialize other features
-    createParticleEffect();
+    // Initialize Intersection Observer
     initIntersectionObserver();
-    initScrollProgress();
     
-    // Add scroll event listeners
-    window.addEventListener('scroll', () => {
-        handleNavbarScroll();
-        handleScrollTopButton();
-        updateActiveNavLink();
-        animateSkillBars();
-        animateCounters();
-        handleParallax();
-    }, { passive: true });
+    // Add optimized scroll event listener
+    window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
     
     // Handle window resize
-    window.addEventListener('resize', () => {
-        // Close mobile nav on resize
+    window.addEventListener('resize', debounce(() => {
         closeMobileNav();
-    });
+    }, 250));
 });
 
 // Smooth reveal animations
