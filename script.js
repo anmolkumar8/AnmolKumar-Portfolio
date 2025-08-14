@@ -214,8 +214,14 @@ function handleContactForm(e) {
         return;
     }
     
-    // Let the form submit naturally to Formspree
-    showNotification('Sending your message...', 'success');
+    // Let the form submit naturally to mailto
+    showNotification('Opening email client...', 'success');
+    
+    // Reset form after a short delay and show additional message
+    setTimeout(() => {
+        contactForm.reset();
+        showNotification('Message ready! Your email client should open to send the message.', 'success');
+    }, 1000);
 }
 
 // Show Notification
