@@ -170,7 +170,7 @@ The website uses CSS variables for easy theming. Main colors can be changed in `
 
 ## 📞 Contact Information
 
-- **Email**: anmol.knp@gmail.com
+- **Email**: anmolkumarhajipur0@gmail.com
 - **Phone**: +91 9508412334
 - **GitHub**: [@anmolkumar8](https://github.com/anmolkumar8)
 - **Location**: Patna, Bihar, India

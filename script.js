@@ -11,7 +11,6 @@ const contactForm = document.getElementById('contact-form');
 // Typing Animation
 const typingPhrases = [
     "Software Developer",
-    "Java Developer", 
     "Problem Solver",
     "Tech Enthusiast",
     "Quick Learner"
