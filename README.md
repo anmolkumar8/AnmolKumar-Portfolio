@@ -53,6 +53,36 @@ AnmolKumar-Portfolio/
 
 ## 🚀 Getting Started
 
+### Quick GitHub Setup
+
+The repository is ready to be pushed to GitHub! Here's what you need to do:
+
+**Step 1: Create GitHub Repository**
+1. Go to [GitHub.com](https://github.com)
+2. Click the "+" icon in the top right corner
+3. Select "New repository"
+4. Repository name: `AnmolKumar-Portfolio`
+5. Description: `Modern responsive portfolio website showcasing skills and projects`
+6. Make it Public
+7. **Do NOT initialize with README, .gitignore, or license** (since we already have files)
+8. Click "Create repository"
+
+**Step 2: Connect and Push (Run these commands in your terminal):**
+```bash
+# Add GitHub as remote origin
+git remote add origin https://github.com/anmolkumar8/AnmolKumar-Portfolio.git
+
+# Push to GitHub
+git push -u origin main
+```
+
+**Alternative: Using GitHub CLI (if you have it installed):**
+```bash
+gh repo create AnmolKumar-Portfolio --public --source=. --push
+```
+
+### Local Usage
+
 1. **Clone or Download** the repository
 2. **Open** `index.html` in your web browser
 3. **Enjoy** the interactive portfolio experience!
